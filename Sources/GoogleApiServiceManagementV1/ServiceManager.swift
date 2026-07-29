@@ -51,7 +51,7 @@ public class ServiceManagerClient: Clients.ServiceManagerProtocol {
   /// @Snippet(path: "ServiceManager_ListServices")
   public func listServices(
     request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiServicemanagementV1.ListServicesResponse {
+  ) async throws -> GoogleApiServiceManagementV1.ListServicesResponse {
     try await self.inner.listServices(request: request, options: options)
   }
 
@@ -66,7 +66,7 @@ public class ServiceManagerClient: Clients.ServiceManagerProtocol {
     byItem: ListServicesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ManagedService, Swift.Error> {
     let listRpc = {
-      (token: Swift.String) async throws -> GoogleApiServicemanagementV1.ListServicesResponse in
+      (token: Swift.String) async throws -> GoogleApiServiceManagementV1.ListServicesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listServices(request: request, options: options)
@@ -80,7 +80,7 @@ public class ServiceManagerClient: Clients.ServiceManagerProtocol {
   /// @Snippet(path: "ServiceManager_GetService")
   public func getService(
     request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiServicemanagementV1.ManagedService {
+  ) async throws -> GoogleApiServiceManagementV1.ManagedService {
     try await self.inner.getService(request: request, options: options)
   }
 
@@ -320,7 +320,7 @@ public class ServiceManagerClient: Clients.ServiceManagerProtocol {
   /// @Snippet(path: "ServiceManager_ListServiceConfigs")
   public func listServiceConfigs(
     request: ListServiceConfigsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiServicemanagementV1.ListServiceConfigsResponse {
+  ) async throws -> GoogleApiServiceManagementV1.ListServiceConfigsResponse {
     try await self.inner.listServiceConfigs(request: request, options: options)
   }
 
@@ -332,7 +332,7 @@ public class ServiceManagerClient: Clients.ServiceManagerProtocol {
     byItem: ListServiceConfigsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleApi.Service, Swift.Error> {
     let listRpc = {
-      (token: Swift.String) async throws -> GoogleApiServicemanagementV1.ListServiceConfigsResponse
+      (token: Swift.String) async throws -> GoogleApiServiceManagementV1.ListServiceConfigsResponse
       in
       var request = byItem
       request.pageToken = token
@@ -468,7 +468,7 @@ public class ServiceManagerClient: Clients.ServiceManagerProtocol {
   /// @Snippet(path: "ServiceManager_ListServiceRollouts")
   public func listServiceRollouts(
     request: ListServiceRolloutsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiServicemanagementV1.ListServiceRolloutsResponse {
+  ) async throws -> GoogleApiServiceManagementV1.ListServiceRolloutsResponse {
     try await self.inner.listServiceRollouts(request: request, options: options)
   }
 
@@ -480,7 +480,7 @@ public class ServiceManagerClient: Clients.ServiceManagerProtocol {
     byItem: ListServiceRolloutsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Rollout, Swift.Error> {
     let listRpc = {
-      (token: Swift.String) async throws -> GoogleApiServicemanagementV1.ListServiceRolloutsResponse
+      (token: Swift.String) async throws -> GoogleApiServiceManagementV1.ListServiceRolloutsResponse
       in
       var request = byItem
       request.pageToken = token
@@ -497,7 +497,7 @@ public class ServiceManagerClient: Clients.ServiceManagerProtocol {
   /// @Snippet(path: "ServiceManager_GetServiceRollout")
   public func getServiceRollout(
     request: GetServiceRolloutRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiServicemanagementV1.Rollout {
+  ) async throws -> GoogleApiServiceManagementV1.Rollout {
     try await self.inner.getServiceRollout(request: request, options: options)
   }
 
@@ -605,7 +605,7 @@ public class ServiceManagerClient: Clients.ServiceManagerProtocol {
   /// @Snippet(path: "ServiceManager_GenerateConfigReport")
   public func generateConfigReport(
     request: GenerateConfigReportRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiServicemanagementV1.GenerateConfigReportResponse {
+  ) async throws -> GoogleApiServiceManagementV1.GenerateConfigReportResponse {
     try await self.inner.generateConfigReport(request: request, options: options)
   }
 
@@ -692,7 +692,7 @@ extension Clients {
   public protocol ServiceManagerProtocol {
     /// See `ServiceManagerClient.listServices`.
     func listServices(request: ListServicesRequest) async throws
-      -> GoogleApiServicemanagementV1.ListServicesResponse
+      -> GoogleApiServiceManagementV1.ListServicesResponse
 
     /// See `ServiceManagerClient.listServices`.
     func listServices(
@@ -707,12 +707,12 @@ extension Clients {
 
     /// See `ServiceManagerClient.getService`.
     func getService(request: GetServiceRequest) async throws
-      -> GoogleApiServicemanagementV1.ManagedService
+      -> GoogleApiServiceManagementV1.ManagedService
 
     /// See `ServiceManagerClient.getService`.
     func getService(
       serviceName: Swift.String,
-    ) async throws -> GoogleApiServicemanagementV1.ManagedService
+    ) async throws -> GoogleApiServiceManagementV1.ManagedService
 
     /// See `ServiceManagerClient.createService`.
     func createService(request: CreateServiceRequest) async throws -> GoogleLongrunning.Operation
@@ -753,7 +753,7 @@ extension Clients {
 
     /// See `ServiceManagerClient.listServiceConfigs`.
     func listServiceConfigs(request: ListServiceConfigsRequest) async throws
-      -> GoogleApiServicemanagementV1.ListServiceConfigsResponse
+      -> GoogleApiServiceManagementV1.ListServiceConfigsResponse
 
     /// See `ServiceManagerClient.listServiceConfigs`.
     func listServiceConfigs(
@@ -801,7 +801,7 @@ extension Clients {
 
     /// See `ServiceManagerClient.listServiceRollouts`.
     func listServiceRollouts(request: ListServiceRolloutsRequest) async throws
-      -> GoogleApiServicemanagementV1.ListServiceRolloutsResponse
+      -> GoogleApiServiceManagementV1.ListServiceRolloutsResponse
 
     /// See `ServiceManagerClient.listServiceRollouts`.
     func listServiceRollouts(
@@ -816,13 +816,13 @@ extension Clients {
 
     /// See `ServiceManagerClient.getServiceRollout`.
     func getServiceRollout(request: GetServiceRolloutRequest) async throws
-      -> GoogleApiServicemanagementV1.Rollout
+      -> GoogleApiServiceManagementV1.Rollout
 
     /// See `ServiceManagerClient.getServiceRollout`.
     func getServiceRollout(
       serviceName: Swift.String,
       rolloutId: Swift.String,
-    ) async throws -> GoogleApiServicemanagementV1.Rollout
+    ) async throws -> GoogleApiServiceManagementV1.Rollout
 
     /// See `ServiceManagerClient.createServiceRollout`.
     func createServiceRollout(request: CreateServiceRolloutRequest) async throws
@@ -840,13 +840,13 @@ extension Clients {
 
     /// See `ServiceManagerClient.generateConfigReport`.
     func generateConfigReport(request: GenerateConfigReportRequest) async throws
-      -> GoogleApiServicemanagementV1.GenerateConfigReportResponse
+      -> GoogleApiServiceManagementV1.GenerateConfigReportResponse
 
     /// See `ServiceManagerClient.generateConfigReport`.
     func generateConfigReport(
       newConfig: GoogleCloudWkt.`Any`?,
       oldConfig: GoogleCloudWkt.`Any`?,
-    ) async throws -> GoogleApiServicemanagementV1.GenerateConfigReportResponse
+    ) async throws -> GoogleApiServiceManagementV1.GenerateConfigReportResponse
 
     /// See `ServiceManagerClient.setIamPolicy`.
     func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws -> GoogleIAMV1.Policy
@@ -876,7 +876,7 @@ extension Clients {
     /// See `ServiceManagerClient.listServices`.
     func listServices(
       request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ListServicesResponse
+    ) async throws -> GoogleApiServiceManagementV1.ListServicesResponse
 
     /// See `ServiceManagerClient.listServices`.
     func listServices(
@@ -886,7 +886,7 @@ extension Clients {
     /// See `ServiceManagerClient.getService`.
     func getService(
       request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ManagedService
+    ) async throws -> GoogleApiServiceManagementV1.ManagedService
 
     /// See `ServiceManagerClient.createService`.
     func createService(
@@ -921,7 +921,7 @@ extension Clients {
     /// See `ServiceManagerClient.listServiceConfigs`.
     func listServiceConfigs(
       request: ListServiceConfigsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ListServiceConfigsResponse
+    ) async throws -> GoogleApiServiceManagementV1.ListServiceConfigsResponse
 
     /// See `ServiceManagerClient.listServiceConfigs`.
     func listServiceConfigs(
@@ -951,7 +951,7 @@ extension Clients {
     /// See `ServiceManagerClient.listServiceRollouts`.
     func listServiceRollouts(
       request: ListServiceRolloutsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ListServiceRolloutsResponse
+    ) async throws -> GoogleApiServiceManagementV1.ListServiceRolloutsResponse
 
     /// See `ServiceManagerClient.listServiceRollouts`.
     func listServiceRollouts(
@@ -961,7 +961,7 @@ extension Clients {
     /// See `ServiceManagerClient.getServiceRollout`.
     func getServiceRollout(
       request: GetServiceRolloutRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.Rollout
+    ) async throws -> GoogleApiServiceManagementV1.Rollout
 
     /// See `ServiceManagerClient.createServiceRollout`.
     func createServiceRollout(
@@ -976,7 +976,7 @@ extension Clients {
     /// See `ServiceManagerClient.generateConfigReport`.
     func generateConfigReport(
       request: GenerateConfigReportRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.GenerateConfigReportResponse
+    ) async throws -> GoogleApiServiceManagementV1.GenerateConfigReportResponse
 
     /// See `ServiceManagerClient.setIamPolicy`.
     func setIamPolicy(
@@ -1008,14 +1008,14 @@ extension Clients {
 // Default implementations
 extension Clients.ServiceManagerProtocol {
   public func listServices(request: ListServicesRequest) async throws
-    -> GoogleApiServicemanagementV1.ListServicesResponse
+    -> GoogleApiServiceManagementV1.ListServicesResponse
   {
     try await self.listServices(request: request, options: .init())
   }
 
   public func listServices(
     request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiServicemanagementV1.ListServicesResponse {
+  ) async throws -> GoogleApiServiceManagementV1.ListServicesResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
@@ -1029,7 +1029,7 @@ extension Clients.ServiceManagerProtocol {
     byItem: ListServicesRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<ManagedService, Swift.Error> {
     let listRpc = {
-      (token: Swift.String) async throws -> GoogleApiServicemanagementV1.ListServicesResponse in
+      (token: Swift.String) async throws -> GoogleApiServiceManagementV1.ListServicesResponse in
       throw GoogleCloudGax.RequestError.unimplemented
     }
     return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
@@ -1047,20 +1047,20 @@ extension Clients.ServiceManagerProtocol {
   }
 
   public func getService(request: GetServiceRequest) async throws
-    -> GoogleApiServicemanagementV1.ManagedService
+    -> GoogleApiServiceManagementV1.ManagedService
   {
     try await self.getService(request: request, options: .init())
   }
 
   public func getService(
     request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiServicemanagementV1.ManagedService {
+  ) async throws -> GoogleApiServiceManagementV1.ManagedService {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
   public func getService(
     serviceName: Swift.String,
-  ) async throws -> GoogleApiServicemanagementV1.ManagedService {
+  ) async throws -> GoogleApiServiceManagementV1.ManagedService {
     let request = GetServiceRequest().with {
       $0.serviceName = serviceName
     }
@@ -1180,14 +1180,14 @@ extension Clients.ServiceManagerProtocol {
   }
 
   public func listServiceConfigs(request: ListServiceConfigsRequest) async throws
-    -> GoogleApiServicemanagementV1.ListServiceConfigsResponse
+    -> GoogleApiServiceManagementV1.ListServiceConfigsResponse
   {
     try await self.listServiceConfigs(request: request, options: .init())
   }
 
   public func listServiceConfigs(
     request: ListServiceConfigsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiServicemanagementV1.ListServiceConfigsResponse {
+  ) async throws -> GoogleApiServiceManagementV1.ListServiceConfigsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
@@ -1201,7 +1201,7 @@ extension Clients.ServiceManagerProtocol {
     byItem: ListServiceConfigsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleApi.Service, Swift.Error> {
     let listRpc = {
-      (token: Swift.String) async throws -> GoogleApiServicemanagementV1.ListServiceConfigsResponse
+      (token: Swift.String) async throws -> GoogleApiServiceManagementV1.ListServiceConfigsResponse
       in
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1306,14 +1306,14 @@ extension Clients.ServiceManagerProtocol {
   }
 
   public func listServiceRollouts(request: ListServiceRolloutsRequest) async throws
-    -> GoogleApiServicemanagementV1.ListServiceRolloutsResponse
+    -> GoogleApiServiceManagementV1.ListServiceRolloutsResponse
   {
     try await self.listServiceRollouts(request: request, options: .init())
   }
 
   public func listServiceRollouts(
     request: ListServiceRolloutsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiServicemanagementV1.ListServiceRolloutsResponse {
+  ) async throws -> GoogleApiServiceManagementV1.ListServiceRolloutsResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
@@ -1327,7 +1327,7 @@ extension Clients.ServiceManagerProtocol {
     byItem: ListServiceRolloutsRequest, options: GoogleCloudGax.RequestOptions
   ) throws -> any AsyncSequence<Rollout, Swift.Error> {
     let listRpc = {
-      (token: Swift.String) async throws -> GoogleApiServicemanagementV1.ListServiceRolloutsResponse
+      (token: Swift.String) async throws -> GoogleApiServiceManagementV1.ListServiceRolloutsResponse
       in
       throw GoogleCloudGax.RequestError.unimplemented
     }
@@ -1346,21 +1346,21 @@ extension Clients.ServiceManagerProtocol {
   }
 
   public func getServiceRollout(request: GetServiceRolloutRequest) async throws
-    -> GoogleApiServicemanagementV1.Rollout
+    -> GoogleApiServiceManagementV1.Rollout
   {
     try await self.getServiceRollout(request: request, options: .init())
   }
 
   public func getServiceRollout(
     request: GetServiceRolloutRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiServicemanagementV1.Rollout {
+  ) async throws -> GoogleApiServiceManagementV1.Rollout {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
   public func getServiceRollout(
     serviceName: Swift.String,
     rolloutId: Swift.String,
-  ) async throws -> GoogleApiServicemanagementV1.Rollout {
+  ) async throws -> GoogleApiServiceManagementV1.Rollout {
     let request = GetServiceRolloutRequest().with {
       $0.serviceName = serviceName
       $0.rolloutId = rolloutId
@@ -1408,21 +1408,21 @@ extension Clients.ServiceManagerProtocol {
   }
 
   public func generateConfigReport(request: GenerateConfigReportRequest) async throws
-    -> GoogleApiServicemanagementV1.GenerateConfigReportResponse
+    -> GoogleApiServiceManagementV1.GenerateConfigReportResponse
   {
     try await self.generateConfigReport(request: request, options: .init())
   }
 
   public func generateConfigReport(
     request: GenerateConfigReportRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> GoogleApiServicemanagementV1.GenerateConfigReportResponse {
+  ) async throws -> GoogleApiServiceManagementV1.GenerateConfigReportResponse {
     throw GoogleCloudGax.RequestError.unimplemented
   }
 
   public func generateConfigReport(
     newConfig: GoogleCloudWkt.`Any`?,
     oldConfig: GoogleCloudWkt.`Any`?,
-  ) async throws -> GoogleApiServicemanagementV1.GenerateConfigReportResponse {
+  ) async throws -> GoogleApiServiceManagementV1.GenerateConfigReportResponse {
     let request = GenerateConfigReportRequest().with {
       $0.newConfig = newConfig
       $0.oldConfig = oldConfig

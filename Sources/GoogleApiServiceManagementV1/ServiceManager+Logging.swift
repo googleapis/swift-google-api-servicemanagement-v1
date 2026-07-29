@@ -24,44 +24,52 @@ import GoogleIAMV1
 import GoogleLongrunning
 import GoogleRpc
 import GoogleCloudGax
+import struct Logging.Logger
 
 extension Clients {
-  final class ServiceManagerRetry: ServiceManagerStub {
+  final class ServiceManagerLogging: ServiceManagerStub {
     let inner: any ServiceManagerStub
-    let options: GoogleCloudGax.ClientOptions
+    let logger: Logger
 
-    public init(_ inner: any ServiceManagerStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any ServiceManagerStub, logger: Logger) {
+      var logger = logger
+      logger[metadataKey: "gcp.artifact.id"] = "google-api-servicemanagement-v1"
+      logger[metadataKey: "gcp.client.service"] = "servicemanagement"
+      logger[metadataKey: "gcp.experimental.swift.client"] = "ServiceManager"
       self.inner = inner
-      self.options = options
+      self.logger = logger
     }
 
     func _intercept<Input, Output>(
       request: Input,
       options: GoogleCloudGax.RequestOptions,
-      idempotent: Swift.Bool,
+      name: Swift.String,
       action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
-        options: options, withDefault: self.options, idempotent: idempotent,
-      )
-      let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
-        var attemptOptions = options
-        attemptOptions.attemptTimeout = attemptTimeout
-        return try await action(request, attemptOptions)
+      var logger = logger
+      logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
+      logger[metadataKey: "gcp.experimental.swift.method"] = .string(name)
+      logger.debug("enter  : \(request) \(options)")
+      do {
+        let output = try await action(request, options)
+        logger.debug("success: \(request) \(options) \(output)")
+        return output
+      } catch let error {
+        logger.debug("error  : \(request) \(options) \(error)")
+        throw error
       }
-      return try await loop.run(attempt: attempt)
     }
 
     public func listServices(
       request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ListServicesResponse {
+    ) async throws -> GoogleApiServiceManagementV1.ListServicesResponse {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "listServices",
         action: {
           (r: ListServicesRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleApiServicemanagementV1.ListServicesResponse
+            -> GoogleApiServiceManagementV1.ListServicesResponse
           in
           return try await self.inner.listServices(request: r, options: o)
         })
@@ -69,14 +77,14 @@ extension Clients {
 
     public func getService(
       request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ManagedService {
+    ) async throws -> GoogleApiServiceManagementV1.ManagedService {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "getService",
         action: {
           (r: GetServiceRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleApiServicemanagementV1.ManagedService
+            -> GoogleApiServiceManagementV1.ManagedService
           in
           return try await self.inner.getService(request: r, options: o)
         })
@@ -88,7 +96,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "createService",
         action: {
           (r: CreateServiceRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleLongrunning.Operation
@@ -103,7 +111,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "deleteService",
         action: {
           (r: DeleteServiceRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleLongrunning.Operation
@@ -118,7 +126,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "undeleteService",
         action: {
           (r: UndeleteServiceRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleLongrunning.Operation
@@ -129,14 +137,14 @@ extension Clients {
 
     public func listServiceConfigs(
       request: ListServiceConfigsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ListServiceConfigsResponse {
+    ) async throws -> GoogleApiServiceManagementV1.ListServiceConfigsResponse {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "listServiceConfigs",
         action: {
           (r: ListServiceConfigsRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleApiServicemanagementV1.ListServiceConfigsResponse
+            -> GoogleApiServiceManagementV1.ListServiceConfigsResponse
           in
           return try await self.inner.listServiceConfigs(request: r, options: o)
         })
@@ -148,7 +156,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "getServiceConfig",
         action: {
           (r: GetServiceConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleApi.Service
@@ -163,7 +171,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "createServiceConfig",
         action: {
           (r: CreateServiceConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleApi.Service
@@ -178,7 +186,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "submitConfigSource",
         action: {
           (r: SubmitConfigSourceRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleLongrunning.Operation
@@ -189,14 +197,14 @@ extension Clients {
 
     public func listServiceRollouts(
       request: ListServiceRolloutsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ListServiceRolloutsResponse {
+    ) async throws -> GoogleApiServiceManagementV1.ListServiceRolloutsResponse {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "listServiceRollouts",
         action: {
           (r: ListServiceRolloutsRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleApiServicemanagementV1.ListServiceRolloutsResponse
+            -> GoogleApiServiceManagementV1.ListServiceRolloutsResponse
           in
           return try await self.inner.listServiceRollouts(request: r, options: o)
         })
@@ -204,14 +212,14 @@ extension Clients {
 
     public func getServiceRollout(
       request: GetServiceRolloutRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.Rollout {
+    ) async throws -> GoogleApiServiceManagementV1.Rollout {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "getServiceRollout",
         action: {
           (r: GetServiceRolloutRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleApiServicemanagementV1.Rollout
+            -> GoogleApiServiceManagementV1.Rollout
           in
           return try await self.inner.getServiceRollout(request: r, options: o)
         })
@@ -223,7 +231,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "createServiceRollout",
         action: {
           (r: CreateServiceRolloutRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleLongrunning.Operation
@@ -234,14 +242,14 @@ extension Clients {
 
     public func generateConfigReport(
       request: GenerateConfigReportRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.GenerateConfigReportResponse {
+    ) async throws -> GoogleApiServiceManagementV1.GenerateConfigReportResponse {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "generateConfigReport",
         action: {
           (r: GenerateConfigReportRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleApiServicemanagementV1.GenerateConfigReportResponse
+            -> GoogleApiServiceManagementV1.GenerateConfigReportResponse
           in
           return try await self.inner.generateConfigReport(request: r, options: o)
         })
@@ -253,7 +261,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "setIamPolicy",
         action: {
           (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
@@ -268,7 +276,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "getIamPolicy",
         action: {
           (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
@@ -283,7 +291,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: false,
+        name: "testIamPermissions",
         action: {
           (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleIAMV1.TestIamPermissionsResponse
@@ -298,7 +306,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "listOperations",
         action: {
           (r: GoogleLongrunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
             async throws -> GoogleLongrunning.ListOperationsResponse
@@ -313,7 +321,7 @@ extension Clients {
       try await self._intercept(
         request: request,
         options: options,
-        idempotent: true,
+        name: "getOperation",
         action: {
           (r: GoogleLongrunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
             -> GoogleLongrunning.Operation

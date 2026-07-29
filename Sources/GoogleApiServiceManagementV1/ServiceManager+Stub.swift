@@ -29,11 +29,11 @@ extension Clients {
   protocol ServiceManagerStub {
     func listServices(
       request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ListServicesResponse
+    ) async throws -> GoogleApiServiceManagementV1.ListServicesResponse
 
     func getService(
       request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ManagedService
+    ) async throws -> GoogleApiServiceManagementV1.ManagedService
 
     func createService(
       request: CreateServiceRequest, options: GoogleCloudGax.RequestOptions
@@ -49,7 +49,7 @@ extension Clients {
 
     func listServiceConfigs(
       request: ListServiceConfigsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ListServiceConfigsResponse
+    ) async throws -> GoogleApiServiceManagementV1.ListServiceConfigsResponse
 
     func getServiceConfig(
       request: GetServiceConfigRequest, options: GoogleCloudGax.RequestOptions
@@ -65,11 +65,11 @@ extension Clients {
 
     func listServiceRollouts(
       request: ListServiceRolloutsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ListServiceRolloutsResponse
+    ) async throws -> GoogleApiServiceManagementV1.ListServiceRolloutsResponse
 
     func getServiceRollout(
       request: GetServiceRolloutRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.Rollout
+    ) async throws -> GoogleApiServiceManagementV1.Rollout
 
     func createServiceRollout(
       request: CreateServiceRolloutRequest, options: GoogleCloudGax.RequestOptions
@@ -77,7 +77,7 @@ extension Clients {
 
     func generateConfigReport(
       request: GenerateConfigReportRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.GenerateConfigReportResponse
+    ) async throws -> GoogleApiServiceManagementV1.GenerateConfigReportResponse
 
     func setIamPolicy(
       request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
@@ -110,7 +110,7 @@ extension Clients {
 
     public func listServices(
       request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ListServicesResponse {
+    ) async throws -> GoogleApiServiceManagementV1.ListServicesResponse {
       let path = try { () throws -> Swift.String in
         return "/v1/services"
       }()
@@ -128,12 +128,12 @@ extension Clients {
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiServicemanagementV1.ListServicesResponse.self, from: data)
+        GoogleApiServiceManagementV1.ListServicesResponse.self, from: data)
     }
 
     public func getService(
       request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ManagedService {
+    ) async throws -> GoogleApiServiceManagementV1.ManagedService {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.serviceName as Swift.String?, !pathVariable0.isEmpty
         else {
@@ -149,7 +149,7 @@ extension Clients {
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiServicemanagementV1.ManagedService.self, from: data)
+        GoogleApiServiceManagementV1.ManagedService.self, from: data)
     }
 
     public func createService(
@@ -217,7 +217,7 @@ extension Clients {
 
     public func listServiceConfigs(
       request: ListServiceConfigsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ListServiceConfigsResponse {
+    ) async throws -> GoogleApiServiceManagementV1.ListServiceConfigsResponse {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.serviceName as Swift.String?, !pathVariable0.isEmpty
         else {
@@ -236,7 +236,7 @@ extension Clients {
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiServicemanagementV1.ListServiceConfigsResponse.self, from: data)
+        GoogleApiServiceManagementV1.ListServiceConfigsResponse.self, from: data)
     }
 
     public func getServiceConfig(
@@ -315,7 +315,7 @@ extension Clients {
 
     public func listServiceRollouts(
       request: ListServiceRolloutsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.ListServiceRolloutsResponse {
+    ) async throws -> GoogleApiServiceManagementV1.ListServiceRolloutsResponse {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.serviceName as Swift.String?, !pathVariable0.isEmpty
         else {
@@ -335,12 +335,12 @@ extension Clients {
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiServicemanagementV1.ListServiceRolloutsResponse.self, from: data)
+        GoogleApiServiceManagementV1.ListServiceRolloutsResponse.self, from: data)
     }
 
     public func getServiceRollout(
       request: GetServiceRolloutRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.Rollout {
+    ) async throws -> GoogleApiServiceManagementV1.Rollout {
       let path = try { () throws -> Swift.String in
         guard let pathVariable0 = request.serviceName as Swift.String?, !pathVariable0.isEmpty
         else {
@@ -359,7 +359,7 @@ extension Clients {
       req.setValue(Clients.clientHeader, forHTTPHeaderField: "X-Goog-Api-Client")
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiServicemanagementV1.Rollout.self, from: data)
+        GoogleApiServiceManagementV1.Rollout.self, from: data)
     }
 
     public func createServiceRollout(
@@ -389,7 +389,7 @@ extension Clients {
 
     public func generateConfigReport(
       request: GenerateConfigReportRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> GoogleApiServicemanagementV1.GenerateConfigReportResponse {
+    ) async throws -> GoogleApiServiceManagementV1.GenerateConfigReportResponse {
       let path = try { () throws -> Swift.String in
         return "/v1/services:generateConfigReport"
       }()
@@ -403,7 +403,7 @@ extension Clients {
       req.httpBody = try JSONEncoder().encode(request)
       let (data, _) = try await self.inner.rpc(for: req).get()
       return try GoogleCloudWkt._ProtoJSONDecoder().decode(
-        GoogleApiServicemanagementV1.GenerateConfigReportResponse.self, from: data)
+        GoogleApiServiceManagementV1.GenerateConfigReportResponse.self, from: data)
     }
 
     public func setIamPolicy(
